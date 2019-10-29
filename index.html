@@ -20,6 +20,18 @@
         <button v-else v-on:click="adicionar(titulo, autor)" class="js-add btn btn-primary btn-block"
             type="button">Adicionar</button>
 
+        <br>
+
+        <div class="js-livro">
+            <div class="js-div-livro js-div-busca">
+                <input v-model="filtro" placeholder="Buscar livro" type="text" class="form-control">
+            </div>
+            <div class="js-div-botoes">
+                <button v-on:click="buscar(filtro)" class="js-add btn btn-primary btn-block"
+                    type="button">Buscar</button>
+            </div>
+        </div>
+
         <div>
             <ol>
                 <li v-for="(livro, index) in livros">
@@ -30,7 +42,7 @@
                         <div class="js-div-botoes">
                             <button v-on:click="selecionar(livro)" class="js-botoes btn btn-primary btn-block"
                                 type="button">Editar</button>
-                            <button v-on:click="remover(index)" class="js-botoes btn btn-primary btn-block"
+                            <button v-on:click="remover(index, livro)" class="js-botoes btn btn-primary btn-block"
                                 type="button">Remover</button>
                         </div>
                     </div>
@@ -40,8 +52,9 @@
     </div>
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
 </html>
