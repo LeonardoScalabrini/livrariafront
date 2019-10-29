@@ -1,0 +1,31 @@
+.container { 
+    width: 40%; 
+    margin: 20px auto 0px auto; 
+} 
+.js-livro {
+    margin-top: 20px;
+    display: flex;
+}
+.js-cancel {
+    background-color: gray;
+    border-color: black;
+}
+.js-botoes {
+    display: inline;
+}
+.js-div-livro {
+    overflow: auto;
+    width: 80%;
+    display: inline-grid;
+    margin-right: 20px;
+}
+.js-div-botoes {
+    width: 20%;
+    display: inline-grid;
+}
+ol {
+    padding-left: 0px;
+}
+ol li { 
+    list-style-type: none;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Lista de livros</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Lista de livros</h2>
+        <input v-model="titulo" placeholder="Adicione um livro" type="text" class="js-novo-livro form-control"> <br>
+        <input v-model="autor" placeholder="Nome do autor" type="text" class="js-novo-autor form-control"> <br>
+        <button v-if="ehEditar" v-on:click="editar(titulo, autor)" class="js-edit btn btn-primary btn-block"
+            type="button">Editar</button>
+        <button v-if="ehEditar" v-on:click="cancelar()" class="js-cancel btn btn-primary btn-block"
+            type="button">Cancelar</button>
+        <button v-else v-on:click="adicionar(titulo, autor)" class="js-add btn btn-primary btn-block"
+            type="button">Adicionar</button>
+
+        <div>
+            <ol>
+                <li v-for="(livro, index) in livros">
+                    <div class="js-livro">
+                        <div class="js-div-livro">
+                            <big>{{ livro.titulo }}</big><small>{{ livro.autor }}</small>
+                        </div>
+                        <div class="js-div-botoes">
+                            <button v-on:click="selecionar(livro)" class="js-botoes btn btn-primary btn-block"
+                                type="button">Editar</button>
+                            <button v-on:click="remover(index)" class="js-botoes btn btn-primary btn-block"
+                                type="button">Remover</button>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+</html>
