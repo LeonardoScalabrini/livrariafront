@@ -9,8 +9,8 @@ var app = new Vue({
         selecionado: null
     },
     methods: {
-        adicionar: function (titulo, autor) {
-            Vue.http.post("http://localhost:8080/livraria", { titulo: titulo, autor: autor })
+        adicionar: function () {
+            Vue.http.post("http://localhost:8080/livraria", { titulo: this.titulo, autor: this.autor })
                 .then(response => {
                     this.livros.push(response.body);
                     this.titulo = '';
@@ -20,26 +20,23 @@ var app = new Vue({
                     Swal.fire('Oops!', 'Algo deu errado!', 'error');
                 });
         },
-        editar: function (titulo, autor) {
-            Vue.http.put("http://localhost:8080/livraria", { id: this.selecionado.id, titulo: titulo, autor: autor })
+        editar: function () {
+            Vue.http.put("http://localhost:8080/livraria", { id: this.selecionado.id, titulo: this.titulo, autor: this.autor })
                 .then(response => {
-                    this.selecionado.titulo = titulo;
-                    this.selecionado.autor = autor;
+                    this.selecionado.titulo = this.titulo;
+                    this.selecionado.autor = this.autor;
                     this.cancelar();
                     Swal.fire('Sucesso!', 'Livro editado com sucesso!', 'success');
                 }, response => {
                     Swal.fire('Oops!', 'Algo deu errado!', 'error');
                 });
         },
-        buscar: function (filtro) {
-            Vue.http.get("http://localhost:8080/livraria/" + filtro)
+        buscar: function () {
+            Vue.http.get("http://localhost:8080/livraria/" + this.filtro)
                 .then(response => {
-                    this.$nextTick(() => {
-                        this.livros = response.body;
-                        
-                        if (response.body.length == 0)
-                            Swal.fire('Oops!', 'Nenhum livro foi encontrado!', 'success');
-                    });
+                    this.livros = response.body;                        
+                    if (response.body.length == 0)
+                        Swal.fire('Oops!', 'Nenhum livro foi encontrado!', 'success');
                 }, response => {
                     Swal.fire('Oops!', 'Algo deu errado!', 'error');
                 });
@@ -48,17 +45,13 @@ var app = new Vue({
             this.titulo = '';
             this.autor = '';
             this.selecionado = null;
-            this.$nextTick(() => {
-                this.ehEditar = false;
-            });
+            this.ehEditar = false;
         },
         selecionar: function (livro) {
             this.titulo = livro.titulo;
             this.autor = livro.autor;
             this.selecionado = livro;
-            this.$nextTick(() => {
-                this.ehEditar = true;
-            });
+            this.ehEditar = true;
         },
         remover: function (index, livro) {
             Vue.http.delete("http://localhost:8080/livraria/" + livro.id)

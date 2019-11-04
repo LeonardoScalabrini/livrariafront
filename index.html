@@ -11,13 +11,13 @@
 <body>
     <div id="app" class="container">
         <h2>Lista de livros</h2>
-        <input v-model="titulo" placeholder="Adicione um livro" type="text" class="js-novo-livro form-control"> <br>
-        <input v-model="autor" placeholder="Nome do autor" type="text" class="js-novo-autor form-control"> <br>
-        <button v-if="ehEditar" v-on:click="editar(titulo, autor)" class="js-edit btn btn-primary btn-block"
+        <input v-model="titulo" placeholder="Adicione um livro" type="text" class="form-control"> <br>
+        <input v-model="autor" placeholder="Nome do autor" type="text" class="form-control"> <br>
+        <button v-if="ehEditar" @click="editar()" class="btn btn-primary btn-block"
             type="button">Editar</button>
-        <button v-if="ehEditar" v-on:click="cancelar()" class="js-cancel btn btn-primary btn-block"
+        <button v-if="ehEditar" @click="cancelar()" class="js-cancel btn btn-primary btn-block"
             type="button">Cancelar</button>
-        <button v-else v-on:click="adicionar(titulo, autor)" class="js-add btn btn-primary btn-block"
+        <button v-else @click="adicionar()" class="btn btn-primary btn-block"
             type="button">Adicionar</button>
 
         <br>
@@ -27,7 +27,7 @@
                 <input v-model="filtro" placeholder="Buscar livro" type="text" class="form-control">
             </div>
             <div class="js-div-botoes">
-                <button v-on:click="buscar(filtro)" class="js-add btn btn-primary btn-block"
+                <button @click="buscar()" class="btn btn-primary btn-block"
                     type="button">Buscar</button>
             </div>
         </div>
@@ -40,9 +40,9 @@
                             <big>{{ livro.titulo }}</big><small>{{ livro.autor }}</small>
                         </div>
                         <div class="js-div-botoes">
-                            <button v-on:click="selecionar(livro)" class="js-botoes btn btn-primary btn-block"
+                            <button @click="selecionar(livro)" class="js-botoes btn btn-primary btn-block"
                                 type="button">Editar</button>
-                            <button v-on:click="remover(index, livro)" class="js-botoes btn btn-primary btn-block"
+                            <button @click="remover(index, livro)" class="js-botoes btn btn-primary btn-block"
                                 type="button">Remover</button>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
     </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script type="text/javascript" src="js/index.js"></script>
