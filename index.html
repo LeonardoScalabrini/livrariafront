@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="UTF-8">
 
 <head>
     <meta charset="utf-8">
@@ -13,13 +14,13 @@
         <h2>Lista de livros</h2>
         <input v-model="titulo" placeholder="Adicione um livro" type="text" class="form-control"> <br>
         <input v-model="autor" placeholder="Nome do autor" type="text" class="form-control"> <br>
-        <button v-if="ehEditar" @click="editar()" class="btn btn-primary btn-block"
-            type="button">Editar</button>
-        <button v-if="ehEditar" @click="cancelar()" class="js-cancel btn btn-primary btn-block"
-            type="button">Cancelar</button>
-        <button v-else @click="adicionar()" class="btn btn-primary btn-block"
-            type="button">Adicionar</button>
-
+        <div v-show="ehEditar">
+            <button @click="editar()" class="btn btn-primary btn-block" type="button">Editar</button>
+            <button @click="cancelar()" class="js-cancel btn btn-primary btn-block" type="button">Cancelar</button>
+        </div>
+        <div v-show="!ehEditar">
+            <button @click="adicionar()" class="btn btn-primary btn-block" type="button">Adicionar</button>
+        </div>
         <br>
 
         <div class="js-livro">
@@ -27,14 +28,13 @@
                 <input v-model="filtro" placeholder="Buscar livro" type="text" class="form-control">
             </div>
             <div class="js-div-botoes">
-                <button @click="buscar()" class="btn btn-primary btn-block"
-                    type="button">Buscar</button>
+                <button @click="buscar()" class="btn btn-primary btn-block" type="button">Buscar</button>
             </div>
         </div>
 
         <div>
-            <ol>
-                <li v-for="(livro, index) in livros">
+            <ul>
+                <li v-for="(livro, index) in livros" :key="livro.id">
                     <div class="js-livro">
                         <div class="js-div-livro">
                             <big>{{ livro.titulo }}</big><small>{{ livro.autor }}</small>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </li>
-            </ol>
+            </ul>
         </div>
     </div>
 </body>

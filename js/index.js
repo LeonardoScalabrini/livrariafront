@@ -34,7 +34,7 @@ var app = new Vue({
         buscar: function () {
             Vue.http.get("http://localhost:8080/livraria/" + this.filtro)
                 .then(response => {
-                    this.livros = response.body;                        
+                    this.livros = response.body;
                     if (response.body.length == 0)
                         Swal.fire('Oops!', 'Nenhum livro foi encontrado!', 'success');
                 }, response => {
