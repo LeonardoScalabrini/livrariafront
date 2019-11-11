@@ -1,5 +1,5 @@
 <template>
-  <div class="usuario-detalhe">
+  <div class="criar-livro">
     <input v-model="titulo" placeholder="Adicione um livro" />
     <br />
     <input v-model="autor" placeholder="Nome do autor" />
@@ -19,16 +19,23 @@ export default {
   },
   methods: {
     adicionar() {
-      mediator.adicionarLivro({ titulo: this.titulo, autor: this.autor });
+      this.$http
+        .post("/", { titulo: this.titulo, autor: this.autor })
+        .then(res => {
+          mediator.adicionarLivro(res.data);
+          this.titulo = null;
+          this.autor = null;
+        });
     }
   },
-  created() {}
+  created() {
+    mediator.selecionarLivroPublisher.addSubscriber(() => {
+      this.titulo = null;
+      this.autor = null;
+    });
+  }
 };
 </script>
 
 <style>
-.usuario-detalhe {
-  flex: 1;
-  border: 1px solid #ccc;
-}
 </style>

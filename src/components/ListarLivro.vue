@@ -1,5 +1,5 @@
 <template>
-  <div class="usuario-detalhe">
+  <div class="listar-livro">
     <ul>
       <li v-for="(livro, index) in livros" :key="livro.id">
         <div>
@@ -30,21 +30,22 @@ export default {
     selecionar(livro) {
       mediator.selecionarLivro(livro);
     },
-    remover(index) {
-      this.livros.splice(index, 1);
+    remover(index, livro) {
+      this.$http.delete("/" + livro.id).then(() => {
+        this.livros.splice(index, 1);
+      });
     }
   },
   created() {
     mediator.adicionarLivroPublisher.addSubscriber(livro => {
       this.livros.push(livro);
     });
+    mediator.buscarLivrosPublisher.addSubscriber(livros => {
+      this.livros = livros;
+    });
   }
 };
 </script>
 
 <style>
-.usuario-detalhe {
-  flex: 1;
-  border: 1px solid #ccc;
-}
 </style>

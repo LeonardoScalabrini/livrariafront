@@ -7,7 +7,8 @@ export default new Vue({
         selecionarLivroPublisher: new Publisher(),
         editarLivroPublisher: new Publisher(),
         removerLivroPublisher: new Publisher(),
-        cancelarEdicaoLivroPublisher: new Publisher()
+        cancelarEdicaoLivroPublisher: new Publisher(),
+        buscarLivrosPublisher: new Publisher()
     },
     methods: {
         adicionarLivro(event) {
@@ -21,6 +22,9 @@ export default new Vue({
         },
         cancelarEdicaoLivro(event) {
             this.cancelarEdicaoLivroPublisher.notifySubscribers(event);
+        },
+        buscarLivros(event) {
+            this.buscarLivrosPublisher.notifySubscribers(event);
         }
     }
 })

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h2>Lista de livros</h2>
-    <criar-livro v-show="!ehEditar" />
+    <criar-livro v-show="!ehEditar"/>
     <editar-livro v-show="ehEditar" />
     <br />
     <buscar-livro />

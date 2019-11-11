@@ -1,5 +1,5 @@
 <template>
-  <div class="usuario-detalhe">
+  <div class="editar-livro">
     <input v-model="titulo" placeholder="Editar livro" />
     <br />
     <input v-model="autor" placeholder="Nome do autor" />
@@ -23,7 +23,11 @@ export default {
     editar() {
       this.livroSelecionado.titulo = this.titulo;
       this.livroSelecionado.autor = this.autor;
-      mediator.editarLivro();
+      this.$http.put("/", this.livroSelecionado).then(() => {
+        mediator.editarLivro();
+        this.titulo = null;
+        this.autor = null;
+      });
     },
     cancelar() {
       this.livroSelecionado = null;
@@ -43,8 +47,4 @@ export default {
 </script>
 
 <style>
-.usuario-detalhe {
-  flex: 1;
-  border: 1px solid #ccc;
-}
 </style>
