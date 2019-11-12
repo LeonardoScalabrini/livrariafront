@@ -1,13 +1,7 @@
 <template>
   <div class="buscar-livro">
-    <div>
-      <div>
-        <input v-model="filtro" type="text" placeholder="Buscar livro" />
-      </div>
-      <div>
-        <button @click="buscar()">Buscar</button>
-      </div>
-    </div>
+    <b-form-input v-model="filtro" type="text" placeholder="Buscar livro" />
+    <b-button variant="outline-primary" @click="buscar()">Buscar</b-button>
   </div>
 </template>
 
@@ -32,5 +26,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.buscar-livro {
+  display: flex;
+}
+.buscar-livro input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.buscar-livro button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 </style>

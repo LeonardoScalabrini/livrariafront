@@ -1,19 +1,21 @@
 <template>
   <div class="listar-livro">
-    <ul>
-      <li v-for="(livro, index) in livros" :key="livro.id">
-        <div>
+    <b-list-group>
+      <b-list-group-item v-for="(livro, index) in livros" :key="livro.id">
+        <div class="item-titulo-autor col">
+          <big>{{ livro.titulo }}</big>
+          <small>{{ livro.autor }}</small>
+        </div>
+        <div class="item-botoes col-1">
           <div>
-            <big>{{ livro.titulo }}</big>
-            <small>{{ livro.autor }}</small>
+            <b-button class="item-botao" variant="success" @click="selecionar(livro)">Editar</b-button>
           </div>
           <div>
-            <button @click="selecionar(livro)">Editar</button>
-            <button @click="remover(index, livro)">Remover</button>
+            <b-button class="item-botao" variant="danger" @click="remover(index, livro)">Remover</b-button>
           </div>
         </div>
-      </li>
-    </ul>
+      </b-list-group-item>
+    </b-list-group>
   </div>
 </template>
 
@@ -47,5 +49,22 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.listar-livro .list-group-item {
+  display: flex;
+}
+
+.listar-livro .list-group-item .item-titulo-autor {
+  display: grid;
+  text-align: left;
+  overflow: auto;
+}
+
+.listar-livro .list-group-item .item-botoes {
+  display: grid;
+}
+
+.listar-livro .list-group-item .item-botoes .item-botao {
+  width: 100%;
+}
 </style>

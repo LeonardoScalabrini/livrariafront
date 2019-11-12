@@ -1,10 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <h2>Lista de livros</h2>
-    <criar-livro v-show="!ehEditar"/>
+    <br />
+    <criar-livro v-show="!ehEditar" />
     <editar-livro v-show="ehEditar" />
     <br />
     <buscar-livro />
+    <br />
     <listar-livro />
   </div>
 </template>
@@ -45,9 +47,6 @@ export default {
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;

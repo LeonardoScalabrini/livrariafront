@@ -1,10 +1,11 @@
 <template>
   <div class="editar-livro">
-    <input v-model="titulo" placeholder="Editar livro" />
+    <b-form-input v-model="titulo" type="text" placeholder="Editar livro" />
     <br />
-    <input v-model="autor" placeholder="Nome do autor" />
-    <button @click="editar()">Editar</button>
-    <button @click="cancelar()">Cancelar</button>
+    <b-form-input v-model="autor" type="text" placeholder="Nome do autor" />
+    <br />
+    <b-button block variant="primary" @click="editar()">Editar</b-button>
+    <b-button block @click="cancelar()">Cancelar</b-button>
   </div>
 </template>
 
@@ -14,9 +15,9 @@ import mediator from "@/mediator";
 export default {
   data() {
     return {
-      titulo: null,
-      autor: null,
-      livroSelecionado: null
+      titulo: "",
+      autor: "",
+      livroSelecionado: {}
     };
   },
   methods: {
@@ -25,14 +26,14 @@ export default {
       this.livroSelecionado.autor = this.autor;
       this.$http.put("/", this.livroSelecionado).then(() => {
         mediator.editarLivro();
-        this.titulo = null;
-        this.autor = null;
+        this.titulo = "";
+        this.autor = "";
       });
     },
     cancelar() {
-      this.livroSelecionado = null;
-      this.titulo = null;
-      this.autor = null;
+      this.livroSelecionado = {};
+      this.titulo = "";
+      this.autor = "";
       mediator.cancelarEdicaoLivro();
     }
   },
@@ -46,5 +47,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.editar-livro {
+  display: block;
+}
 </style>
