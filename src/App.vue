@@ -2,8 +2,7 @@
   <div id="app" class="container">
     <h2>Lista de livros</h2>
     <br />
-    <criar-livro v-show="!ehEditar" />
-    <editar-livro v-show="ehEditar" />
+    <router-view />
     <br />
     <buscar-livro />
     <br />
@@ -12,8 +11,6 @@
 </template>
 
 <script>
-import CriarLivro from "@/components/CriarLivro.vue";
-import EditarLivro from "@/components/EditarLivro.vue";
 import BuscarLivro from "@/components/BuscarLivro.vue";
 import ListarLivro from "@/components/ListarLivro.vue";
 import mediator from "@/mediator";
@@ -26,8 +23,6 @@ export default {
     };
   },
   components: {
-    CriarLivro,
-    EditarLivro,
     BuscarLivro,
     ListarLivro
   },
