@@ -9,31 +9,20 @@
 </template>
 
 <script>
-import mediator from "@/mediator";
-
 export default {
   data() {
     return {
-      titulo: "",
-      autor: ""
+      titulo: null,
+      autor: null
     };
   },
   methods: {
     adicionar() {
-      this.$http
-        .post("/", { titulo: this.titulo, autor: this.autor })
-        .then(res => {
-          mediator.adicionarLivro(res.data);
-          this.titulo = "";
-          this.autor = "";
-        });
+      this.$store.dispatch("criarLivro", {
+        titulo: this.titulo,
+        autor: this.autor
+      });
     }
-  },
-  created() {
-    mediator.selecionarLivroPublisher.addSubscriber(() => {
-      this.titulo = "";
-      this.autor = "";
-    });
   }
 };
 </script>

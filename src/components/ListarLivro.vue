@@ -8,7 +8,7 @@
         </div>
         <div class="item-botoes col-1">
           <div>
-            <b-button class="item-botao" variant="success" @click="selecionar(livro)">Editar</b-button>
+            <b-button class="item-botao" variant="success" @click="selecionar(index)">Editar</b-button>
           </div>
           <div>
             <b-button class="item-botao" variant="danger" @click="remover(index, livro)">Remover</b-button>
@@ -20,31 +20,22 @@
 </template>
 
 <script>
-import mediator from "@/mediator";
-
 export default {
-  data() {
-    return {
-      livros: []
-    };
-  },
-  methods: {
-    selecionar(livro) {
-      mediator.selecionarLivro(livro);
-    },
-    remover(index, livro) {
-      this.$http.delete("/" + livro.id).then(() => {
-        this.livros.splice(index, 1);
-      });
+  computed: {
+    livros() {
+      return this.$store.getters.getLivros;
     }
   },
-  created() {
-    mediator.adicionarLivroPublisher.addSubscriber(livro => {
-      this.livros.push(livro);
-    });
-    mediator.buscarLivrosPublisher.addSubscriber(livros => {
-      this.livros = livros;
-    });
+  methods: {
+    selecionar(index) {
+      this.$store.dispatch("selecionarLivro", index);
+      this.$router.push({
+        name: "editar"
+      });
+    },
+    remover(index, livro) {
+      this.$store.dispatch("removerLivro", { index, livro });
+    }
   }
 };
 </script>

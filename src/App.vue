@@ -13,29 +13,12 @@
 <script>
 import BuscarLivro from "@/components/BuscarLivro.vue";
 import ListarLivro from "@/components/ListarLivro.vue";
-import mediator from "@/mediator";
 
 export default {
   name: "app",
-  data() {
-    return {
-      ehEditar: false
-    };
-  },
   components: {
     BuscarLivro,
     ListarLivro
-  },
-  created() {
-    mediator.selecionarLivroPublisher.addSubscriber(() => {
-      this.ehEditar = true;
-    });
-    mediator.editarLivroPublisher.addSubscriber(() => {
-      this.ehEditar = false;
-    });
-    mediator.cancelarEdicaoLivroPublisher.addSubscriber(() => {
-      this.ehEditar = false;
-    });
   }
 };
 </script>

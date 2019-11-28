@@ -6,23 +6,17 @@
 </template>
 
 <script>
-import mediator from "@/mediator";
-
 export default {
   data() {
     return {
-      filtro: ""
+      filtro: null
     };
   },
   methods: {
     buscar() {
-      this.$http.get("/" + this.filtro).then(res => {
-        mediator.buscarLivros(res.data);
-        this.filtro = "";
-      });
+      this.$store.dispatch("buscarLivros", this.filtro);
     }
-  },
-  created() {}
+  }
 };
 </script>
 

@@ -6,11 +6,14 @@ import EditarLivro from '@/components/EditarLivro.vue'
 Vue.use(Router)
 
 export default new Router({
+    mode: "hash",
     routes: [{
-        path: '/criar',
-        component: CriarLivro
+        path: '/',
+        component: CriarLivro,
+        name: 'adicionar'
     }, {
         path: '/editar',
-        component: EditarLivro
+        component: EditarLivro,
+        name: 'editar'
     }]
 })
